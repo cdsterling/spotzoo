@@ -6,15 +6,9 @@
   height: 100vh;
 }
 
-.NavBar {
+.NavBarContainer {
   grid-row: 1;
   grid-column: 1 / span 2;
-  /* display: flex; */
-  /* overflow: hidden;   */
-}
-
-.NavBar-title {
-  flex: 1;
 }
 
 .SideBar {
