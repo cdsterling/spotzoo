@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import NavBar from './components/NavBar/NavBar.js';
+import SmallCard from './components/SmallCard/SmallCard.js';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,78 +18,45 @@ class App extends Component {
       <div className="App">
         {/* Links go here */}
         <div className="NavBarContainer">
-          <NavBar />
+          <NavBar 
+            homeLink='/'
+            contributeLink='/contribute'
+          />
         </div>
         {/* switch/routes go here */}
-        <div className="SideBar">
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
-          <Card className="AnimalCard">
-            <div className="AnimalCard-thumbnail">
-              Image
-              Placeholder
-            </div>
-            <div className="AnimalCard-text">
-              <p>Name</p>
-              <p>Time</p>
-              <p>Reported by</p>
-            </div>
-          </Card>
+        <div className="SideBarContainer">
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
         </div>
-        <div className="Map">
+        <div className="MapContainer">
           Map
         </div>
       </div>

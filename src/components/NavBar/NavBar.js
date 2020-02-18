@@ -11,16 +11,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import './NavBar.css';
 class NavBar extends Component {
   render() {
+    const {homeLink, contributeLink} = this.props;
     return (
     <AppBar position="static">
         <Toolbar className="NavBar-toolbar">
-        <IconButton edge="start" className="NavBar-map" color="inherit" aria-label="map">
+        <IconButton edge="start" className="NavBar-map" color="inherit" aria-label="map" href={homeLink}>
             <MapIcon />
         </IconButton>
-        <Typography variant="h6" className="NavBar-title">
+        <h3 className="NavBar-title">
             SpotZoo
-        </Typography>         
-        <IconButton edge="end" className="NavBar-add" color="inherit" aria-label="add">
+        </h3>         
+        <IconButton edge="end" className="NavBar-add" color="inherit" aria-label="add" href={contributeLink}>
             <AddLocationIcon />
         </IconButton>
         </Toolbar>
