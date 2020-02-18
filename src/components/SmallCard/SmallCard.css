@@ -1,0 +1,16 @@
+.SmallCard {
+    display: grid; 
+    grid-template-columns: 2;
+    margin: .5rem;
+    /* height: 100px; */
+    flex-shrink: 0;
+  }
+  
+  .SmallCard-thumbnail {
+    grid-column: 1;
+  }
+  
+  .SmallCard-text {
+    grid-column: 2;
+  }
+  
