@@ -4,11 +4,6 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
 
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-
-
 class App extends Component {
 
   state = {}
