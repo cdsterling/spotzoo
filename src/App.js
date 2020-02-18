@@ -14,9 +14,56 @@ import MapIcon from '@material-ui/icons/Map';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import SearchIcon from '@material-ui/icons/Search';
 
+//Component - Pages
+import Welcome from './components/pages/Welcome/Welcome.js';
+
+animal_data = [
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        spot_time:"7:22 AM",
+        animalType: "Goose"
+    }
+
+
+]
+
+
 class App extends Component {
 
-  state = {}
+  state = {
+      animal_details: animal_data,
+      filter: "",
+      highlighted_animal: null,
+      animal_name: "",
+      animal_latitude: null,
+      animal_longitude: null,
+      animal_spot_time: null,
+      animal_animalType: null
+
+  }
 
   render () {
     return (
