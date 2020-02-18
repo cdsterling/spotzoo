@@ -8,7 +8,6 @@
 ### Software goal and concept
 “As a bird watcher, I want to know where I can see cool birds near me, so that I can go see them too.”    
 “As a runner, I want to know where the racoons are around Lake Merritt, so that I can avoid them.”    
-"As a beareaved dog owner, I want to know if my missing dog has been spotted, so that I can find my precious Rutherford!"
 "As a hunter..."
 
 ### Project Specs
@@ -57,13 +56,13 @@
 
 #### Cursory Wireframes
 
-##### URL: "/"   
+##### URL: "/"  Page-Component: Home  
 ![](./wireframe/home.jpg)   
 
-##### URL: "/:photoId"   
+##### URL: "/spotting/:spottingId"  Page-Component: Spotting  
 ![](./wireframe/photoid.jpg)
 
-#### URL: "/add"   
+#### URL: "/contribute"  Page-Component: Contribute  
 ![](./wireframe/add.jpg)     
 
 
@@ -80,3 +79,21 @@
 * Josh -> Design / Front-end engineer   
 * Chad -> Front-end / Back-end engineer   
 * Marby -> Back-end / Data engineer   
+
+### Components   
+* Map   
+    * Markers for unselected and selected animals  
+    * tooltip for selected marker?  
+* SmallCard
+    * thumbnail   
+    * text   
+* BigCard   
+    * thumbnail  
+    * text  
+* NavBar  
+    * title  
+    * map icon  
+    * add icon  
+* AddCard  
+    * input boxes  
+    * submit button  
