@@ -5,9 +5,12 @@ import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
 
 //Component - Pages
-import Welcome from './components/pages/Welcome/Welcome.js';
+import Contribute from './components/pages/Contribute/Contribute.js';
+import Home from './components/pages/Home/Home.js';
+import Spotting from './components/pages/Spotting/Spotting.js';
 
-animal_data = [
+
+let animal_data = [
     { 
         name: "Lake Goose",
         latitude: 1.22,
@@ -36,9 +39,7 @@ animal_data = [
         spot_time:"7:22 AM",
         animalType: "Goose"
     }
-
-
-]
+];
 
 
 class App extends Component {
