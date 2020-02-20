@@ -16,28 +16,33 @@ let animal_data = [
         latitude: 1.22,
         longitude: 3.22,
         time:"7:22 AM",
-        animalType: "Goose"
+        animalType: "Goose",
+        spotter: "Chad"
     },
     { 
         name: "Lake Goose",
         latitude: 1.22,
         longitude: 3.22,
         time:"7:22 AM",
-        animalType: "Goose"
+        animalType: "Goose",
+        spotter: "Josh"
+
     },
     { 
         name: "Lake Goose",
         latitude: 1.22,
         longitude: 3.22,
         time:"7:22 AM",
-        animalType: "Goose"
+        animalType: "Goose",
+        spotter: "Marby"
     },
     { 
         name: "Lake Goose",
         latitude: 1.22,
         longitude: 3.22,
         spot_time:"7:22 AM",
-        animalType: "Goose"
+        animalType: "Goose", 
+        spotter: "Michael"
     }
 ];
 
@@ -68,6 +73,17 @@ class App extends Component {
         </div>
         {/* switch/routes go here */}
         <div className="SideBarContainer">
+          {
+          this.state.animal_details.map( animal => (
+              <SmallCard 
+              emoji={'🐇'}
+              name={animal.name}
+              timestamp={animal.time}
+              submitted_by={animal.spotter}
+              />
+          )
+          )}
+          
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
