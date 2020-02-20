@@ -7,47 +7,47 @@ import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
 
-//Component - Pages
-// import Welcome from './components/pages/Welcome/Welcome.js';
+Component - Pages
+import Welcome from './components/pages/Welcome/Welcome.js';
 
-// animal_data = [
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         spot_time:"7:22 AM",
-//         animalType: "Goose"
-//     }
+animal_data = [
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        time:"7:22 AM",
+        animalType: "Goose"
+    },
+    { 
+        name: "Lake Goose",
+        latitude: 1.22,
+        longitude: 3.22,
+        spot_time:"7:22 AM",
+        animalType: "Goose"
+    }
 
 
-// ]
+]
 
 
 class App extends Component {
 
   state = {
-      animal_details: null,
+      animal_details: animal_data,
       filter: "",
       highlighted_animal: null,
       animal_name: "",
