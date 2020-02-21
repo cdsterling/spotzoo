@@ -68,11 +68,10 @@ class App extends Component {
       
     };
   
-
   onViewportChange = viewport => {
     this.setState({viewport});
   }
-
+  // User location function
   setUserLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
        let setUserLocation = {
@@ -87,18 +86,19 @@ class App extends Component {
     });
   };    
     
-  deleteArticle(documentId) {
+  // DELETE function,
+  deleteMarker(documentId) {
     fetch('/api/mongodb/markers/?_id=' + documentId, {
         method: 'DELETE',
       })
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
-
-        // Call method to refresh data
         this.onFetch();
       });
   }
+
+  // Api call grab data from mongodb
   onFetch() {
     console.log('runing')
     let dataOne = []
@@ -113,7 +113,7 @@ class App extends Component {
     });
   }
 
-    
+  //Post function// create new markers, store data into database
   submit = () => {
       var date = new Date();
     
@@ -222,7 +222,7 @@ class App extends Component {
             longitude={data.longitude}
             
             >
-            <img className = "location-icon" src={Red} onClick={() => this.deleteArticle(data._id)}
+            <img className = "location-icon" src={Red} 
             />
             {data.animal}</Marker>
   
