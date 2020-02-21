@@ -7,47 +7,47 @@ import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
 
-Component - Pages
-import Welcome from './components/pages/Welcome/Welcome.js';
+// Component - Pages
+// import Welcome from './components/pages/Welcome/Welcome.js';
 
-animal_data = [
-    { 
-        name: "Lake Goose",
-        latitude: 1.22,
-        longitude: 3.22,
-        time:"7:22 AM",
-        animalType: "Goose"
-    },
-    { 
-        name: "Lake Goose",
-        latitude: 1.22,
-        longitude: 3.22,
-        time:"7:22 AM",
-        animalType: "Goose"
-    },
-    { 
-        name: "Lake Goose",
-        latitude: 1.22,
-        longitude: 3.22,
-        time:"7:22 AM",
-        animalType: "Goose"
-    },
-    { 
-        name: "Lake Goose",
-        latitude: 1.22,
-        longitude: 3.22,
-        spot_time:"7:22 AM",
-        animalType: "Goose"
-    }
+// animal_data = [
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         spot_time:"7:22 AM",
+//         animalType: "Goose"
+//     }
 
 
-]
+// ]
 
 
 class App extends Component {
 
   state = {
-      animal_details: animal_data,
+      animal_details: null,
       filter: "",
       highlighted_animal: null,
       animal_name: "",
@@ -64,6 +64,8 @@ class App extends Component {
       },
       userLocation : {},
       data:[],
+      distance : null,
+      
     };
   
 
@@ -83,9 +85,20 @@ class App extends Component {
        this.state.viewport.latitude = position.coords.latitude;
        this.state.viewport.longitude = position.coords.longitude;
     });
-  };
-  
+  };    
+    
+  deleteArticle(documentId) {
+    fetch('/api/mongodb/markers/?_id=' + documentId, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
 
+        // Call method to refresh data
+        this.onFetch();
+      });
+  }
   onFetch() {
     console.log('runing')
     let dataOne = []
@@ -129,12 +142,13 @@ class App extends Component {
   }
   componentDidMount(){
     this.setUserLocation();
-    this.onFetch();
+    this.onFetch();  
 
   }
 
 
   render () {
+    
     return (
       <div className="App">
         {/* Links go here */}
@@ -208,7 +222,8 @@ class App extends Component {
             longitude={data.longitude}
             
             >
-            <img className = "location-icon" src={Red}/>
+            <img className = "location-icon" src={Red} onClick={() => this.deleteArticle(data._id)}
+            />
             {data.animal}</Marker>
   
           ))

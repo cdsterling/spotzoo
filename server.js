@@ -16,7 +16,8 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 app.use(express.json());
-
+const PORT = 5000;
+const ObjectId = require('mongodb').ObjectId;
 
 const MONGODB_URL = "mongodb+srv://marby123:marby123@cluster0-itdny.mongodb.net/spotzoo1";
 const MONGODB_DATABASE = 'spotzoo1';
@@ -49,7 +50,34 @@ app.post('/api/mongodb/:collectionName/', (request, response) => {
     });
 });
 
-const PORT = 5000;
+app.delete('/api/mongodb/:collectionName/', (request, response) => {
+  const collectionName = request.params.collectionName;
+  const query = request.query;
+
+  // Due to a requirement of MongoDB, whenever we query based on _id field, we
+  // have to do it like this using ObjectId
+  if (query._id) {
+    query._id = ObjectId(query._id);
+  }
+
+  db.collection(collectionName)
+    .deleteOne(query, (err, results) => {
+      if (err) throw err;
+
+      // If we deleted exactly 1, then success, otherwise failure
+      if (results.result.n === 1) {
+        response.json({
+          success: true,
+        });
+      } else {
+        response.json({
+          success: false,
+        });
+      }
+    })
+});
+
+
 
 function logger(req, res, next) {
   console.log(req.method, req.url);
