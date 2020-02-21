@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import mapboxgl from 'mapbox-gl'
 
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
@@ -64,7 +65,7 @@ class App extends Component {
       },
       userLocation : {},
       data:[],
-      distance : null,
+      distance : {}
       
     };
   
@@ -77,7 +78,20 @@ class App extends Component {
        let setUserLocation = {
            lat: position.coords.latitude,
            long: position.coords.longitude
-        };
+        }; 
+        // distance to markers
+        let distanceOne = []
+        for (let i of this.state.data ){
+            let k = new mapboxgl.LngLat(i.longitude, i.latitude);
+            let s = new mapboxgl.LngLat(setUserLocation.long, setUserLocation.lat)
+            let dist = k.distanceTo(s)* 0.000621
+            let miles = (Math.max( Math.ceil(dist * 10) / 10, 2.8 ))
+            let id = i["_id"];
+            distanceOne.push({ [id] : miles })      
+          } 
+        this.setState({
+          distance : distanceOne
+        })
         this.setState({
           userLocation: setUserLocation,
        });
@@ -99,13 +113,24 @@ class App extends Component {
   }
 
   // Api call grab data from mongodb
+
+  // this.setState({data}, () => console.log('data fetched...', data)
+  //       dataOne.push(data);
   onFetch() {
     console.log('runing')
     let dataOne = []
     fetch('/api/mongodb/markers/')
         .then(res => res.json())
-        .then(data => this.setState({data}, () => console.log('data fetched...', data)));
-    }
+        .then(data => {
+          console.log('receiving data', data);
+          dataOne.push(data);
+          this.setState({data});
+          console.log(dataOne)
+          this.setUserLocation();
+          
+                 
+        });
+      }
 
   onChangeContent = (ev) => {
     this.setState({
@@ -141,13 +166,15 @@ class App extends Component {
         });
   }
   componentDidMount(){
-    this.setUserLocation();
+    
     this.onFetch();  
 
   }
 
 
   render () {
+    console.log(this.state.distance)
+    
     
     return (
       <div className="App">
@@ -216,15 +243,15 @@ class App extends Component {
           this.state.data.map((data,index) => (
           <Marker
             className = "markers"
-            keys={data.id}
-            id={data.id}
+            keys={data._id}
+            id={data._id}
             latitude={data.latitude}
             longitude={data.longitude}
             
             >
             <img className = "location-icon" src={Red} 
             />
-            {data.animal}</Marker>
+            {data.animal} {this.state.distance[data._id]}</Marker>
   
           ))
         ) : (
