@@ -44,6 +44,7 @@ import User from "./user.png"
 
 // ]
 
+const MAPBOX_TOKEN = process.env.REACT_APP_TOKEN;
 
 class App extends Component {
 
@@ -210,10 +211,10 @@ class App extends Component {
         </div>
 
         <div className="MapContainer">
-            
+
             <ReactMapGl
                 {...this.state.viewport}
-                mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+                mapboxApiAccessToken = {MAPBOX_TOKEN}
                 mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
                 onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
                 
