@@ -90,14 +90,15 @@ class App extends Component {
             distanceOne[id] = miles;     
           } 
         this.setState({
-          distance : distanceOne
-        })
-        console.log(this.state.distance)
-        this.setState({
+          distance : distanceOne,
           userLocation: setUserLocation,
-       });
-       this.state.viewport.latitude = position.coords.latitude;
-       this.state.viewport.longitude = position.coords.longitude;
+          viewport: {
+            latitude :position.coords.latitude,
+            longitude : position.coords.longitude
+          }
+
+        });
+        
     });
   };    
     
@@ -125,7 +126,7 @@ class App extends Component {
         .then(data => {
           console.log('receiving data', data);
           dataOne.push(data);
-          this.setState({data});
+        //   this.setState({data});
           console.log(dataOne)
 
           this.setUserLocation();
@@ -188,6 +189,18 @@ class App extends Component {
         </div>
         {/* switch/routes go here */}
         <div className="SideBarContainer">
+
+          {/* {
+            this.state.animal_details.map( animal => (
+              <SmallCard 
+              emoji={'🐇'}
+              name={animal.name}
+              timestamp={animal.time}
+              submitted_by={animal.spotter}
+              />
+            )
+          )} */}
+
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
@@ -234,7 +247,7 @@ class App extends Component {
             longitude={this.state.userLocation.long}
           >
           
-            <img className = "location-icon" src={User}/>
+            <img className = "location-icon" alt="location-icon" src={User}/>
           </Marker>
         ) : ( 
            <div>Empty</div>
@@ -250,7 +263,7 @@ class App extends Component {
             longitude={data.longitude}
             
             >
-            <img className = "location-icon" src={Red} 
+            <img className = "location-icon" alt="location-icon" src={Red} 
             />
             {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
   
