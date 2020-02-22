@@ -65,7 +65,7 @@ class App extends Component {
       },
       userLocation : {},
       data:[],
-      distance : {}
+      distance : []
       
     };
   
@@ -80,18 +80,19 @@ class App extends Component {
            long: position.coords.longitude
         }; 
         // distance to markers
-        let distanceOne = []
+        let distanceOne = {}
         for (let i of this.state.data ){
             let k = new mapboxgl.LngLat(i.longitude, i.latitude);
             let s = new mapboxgl.LngLat(setUserLocation.long, setUserLocation.lat)
             let dist = k.distanceTo(s)* 0.000621
             let miles = (Math.max( Math.ceil(dist * 10) / 10, 2.8 ))
             let id = i["_id"];
-            distanceOne.push({ [id] : miles })      
+            distanceOne[id] = miles;     
           } 
         this.setState({
           distance : distanceOne
         })
+        console.log(this.state.distance)
         this.setState({
           userLocation: setUserLocation,
        });
@@ -126,6 +127,7 @@ class App extends Component {
           dataOne.push(data);
           this.setState({data});
           console.log(dataOne)
+
           this.setUserLocation();
           
                  
@@ -173,7 +175,6 @@ class App extends Component {
 
 
   render () {
-    console.log(this.state.distance)
     
     
     return (
@@ -251,7 +252,7 @@ class App extends Component {
             >
             <img className = "location-icon" src={Red} 
             />
-            {data.animal} {this.state.distance[data._id]}</Marker>
+            {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
   
           ))
         ) : (
