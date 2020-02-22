@@ -120,15 +120,15 @@ class App extends Component {
   // this.setState({data}, () => console.log('data fetched...', data)
   //       dataOne.push(data);
   onFetch() {
-    console.log('runing')
+    console.log('entering onFetch method')
     let dataOne = []
     fetch('/api/mongodb/markers/')
         .then(res => res.json())
         .then(data => {
           console.log('receiving data', data);
           dataOne.push(data);
-        //   this.setState({data});
-          console.log(dataOne)
+          this.setState({data});
+          console.log("data recieved from the markers request in OnFetch",dataOne)
 
           this.setUserLocation();
           
