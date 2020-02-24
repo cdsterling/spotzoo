@@ -9,11 +9,15 @@ import AddLocationIcon from '@material-ui/icons/AddLocation';
 import SearchIcon from '@material-ui/icons/Search';
 
 import './NavBar.css';
+const style = {
+  background : '#858363', 
+};
+
 class NavBar extends Component {
   render() {
     const {homeLink, contributeLink} = this.props;
     return (
-    <AppBar position="static">
+    <AppBar position="static" style={style} elevation={0} >
         <Toolbar className="NavBar-toolbar">
         <IconButton edge="start" className="NavBar-map" color="inherit" aria-label="map" href={homeLink}>
             <MapIcon />

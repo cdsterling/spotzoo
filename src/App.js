@@ -22,33 +22,33 @@ class App extends Component {
         <div className="SideBarContainer">
           <SmallCard 
             emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            name={'Rabbit'}
+            timestamp={'10pm on October 21st'}
+            submittedBy={'Josh'}
           />
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            submittedBy={'submitted by'}
           />
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            submittedBy={'submitted by'}
           />
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            submittedBy={'submitted by'}
           />
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            submittedBy={'submitted by'}
           />
         </div>
         <div className="MapContainer">

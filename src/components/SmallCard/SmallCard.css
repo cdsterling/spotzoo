@@ -1,16 +1,17 @@
 .SmallCard {
-    display: grid; 
-    grid-template-columns: 2;
-    margin: .5rem;
-    /* height: 100px; */
-    flex-shrink: 0;
+    flex-shrink: 0;    
   }
-  
-  .SmallCard-thumbnail {
-    grid-column: 1;
+
+  .SmallCard-primary {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
   }
-  
-  .SmallCard-text {
-    grid-column: 2;
+
+  .SmallCard-primary-details {
+    display: flex;
+    flex-grow: 1;
+    padding-top: .5rem;
+    font-style: italic;
+    justify-content: center;
   }
-  
