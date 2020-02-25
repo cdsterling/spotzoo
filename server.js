@@ -25,6 +25,8 @@ const MONGODB_DATABASE = 'spotzoo1';
 
 app.get('/api/mongodb/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
+  console.log("method app.GET is invoked, collectionName:", collectionName);
+
 
   const query = request.query || {};
   db.collection(collectionName)
@@ -38,9 +40,11 @@ app.get('/api/mongodb/:collectionName/', (request, response) => {
 app.post('/api/mongodb/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
   const data = request.body;
+  console.log("method app.POST is invoked, data:", data);
+
 
   db.collection(collectionName)
-    .insert(data, (err, results) => {
+    .insertOne(data, (err, results) => {
       if (err) throw err;
 
       response.json({
@@ -51,8 +55,10 @@ app.post('/api/mongodb/:collectionName/', (request, response) => {
 });
 
 app.delete('/api/mongodb/:collectionName/', (request, response) => {
+  
   const collectionName = request.params.collectionName;
   const query = request.query;
+  console.log("method app.DELETE is invoked, query:", query)
 
   // Due to a requirement of MongoDB, whenever we query based on _id field, we
   // have to do it like this using ObjectId
