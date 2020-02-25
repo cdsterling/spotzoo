@@ -1,5 +1,5 @@
 # SpotZoo
-   
+    
 ### Developers   
 * Chad   
 * Marby   
