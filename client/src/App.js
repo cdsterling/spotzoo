@@ -10,6 +10,7 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
 
+const MAPBOX_TOKEN = process.env.REACT_APP_TOKEN;
 import Home from './components/pages/Home/Home.js';
 import Contribute from './components/pages/Contribute/Contribute.js';
 import Spotting from './components/pages/Spotting/Spotting.js';
@@ -59,14 +60,15 @@ class App extends Component {
             distanceOne[id] = miles;     
           } 
         this.setState({
-          distance : distanceOne
-        })
-        console.log(this.state.distance)
-        this.setState({
+          distance : distanceOne,
           userLocation: setUserLocation,
-       });
-       this.state.viewport.latitude = position.coords.latitude;
-       this.state.viewport.longitude = position.coords.longitude;
+          viewport: {
+            latitude :position.coords.latitude,
+            longitude : position.coords.longitude
+          }
+
+        });
+        
     });
   };    
     
@@ -94,7 +96,7 @@ class App extends Component {
         .then(data => {
           console.log('receiving data', data);
           dataOne.push(data);
-          this.setState({data});
+        //   this.setState({data});
           console.log(dataOne)
 
           this.setUserLocation();
@@ -165,79 +167,69 @@ class App extends Component {
         </div>
         
         <div className="SideBarContainer">
+
+          {/* {
+            this.state.animal_details.map( animal => (
+              <SmallCard 
+              emoji={'🐇'}
+              name={animal.name}
+              timestamp={animal.time}
+              submitted_by={animal.spotter}
+              />
+            )
+          )} */}
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
             submitted_by={'submitted by'}
           />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
+          
         </div>
+
         <div className="MapContainer">
-        <ReactMapGl
-        {...this.state.viewport}
-        mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-        mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-        onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-        
-        {Object.keys(this.state.userLocation).length !== 0 ? (
-          <Marker
-            className="user"
-            keys ="1"
-            latitude={this.state.userLocation.lat}
-            longitude={this.state.userLocation.long}
-          >
-          
-            <img className = "location-icon" src={User}/>
-          </Marker>
-        ) : ( 
-           <div>Empty</div>
-        )}
 
-        {Object.values(this.state.data).length !==0 ?(
-          this.state.data.map((data,index) => (
-          <Marker
-            className = "markers"
-            keys={data._id}
-            id={data._id}
-            latitude={data.latitude}
-            longitude={data.longitude}
+            <ReactMapGl
+                {...this.state.viewport}
+                mapboxApiAccessToken = {MAPBOX_TOKEN}
+                mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
+                onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
+                
+                {Object.keys(this.state.userLocation).length !== 0 ? (
+                <Marker
+                    className="user"
+                    keys ="1"
+                    latitude={this.state.userLocation.lat}
+                    longitude={this.state.userLocation.long}
+                >
             
-            >
-            <img className = "location-icon" src={Red} 
-            />
-            {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
-  
-          ))
-        ) : (
-          <div>Empty</div>
-        )}
-          
+                    <img className = "location-icon" alt="location-icon" src={User}/>
+                </Marker>
+                ) : ( 
+                <div>Empty</div>
+                )}
 
-      </ReactMapGl>
+                {Object.values(this.state.data).length !==0 ?(
+                this.state.data.map((data,index) => (
+                <Marker
+                    className = "markers"
+                    keys={data._id}
+                    id={data._id}
+                    latitude={data.latitude}
+                    longitude={data.longitude}
+                    
+                    >
+                    <img className = "location-icon" alt="location-icon" src={Red} 
+                    />
+                    {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
+        
+                ))
+                ) : (
+                <div>Empty</div>
+                )}
+            
+
+            </ReactMapGl>
         </div>
       </div>
     );
