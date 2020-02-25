@@ -21,34 +21,32 @@ class App extends Component {
         {/* switch/routes go here */}
         <div className="SideBarContainer">
           <SmallCard 
-            emoji={'🐇'}
-            name={'Rabbit'}
-            timestamp={'10pm on October 21st'}
-            submittedBy={'Josh'}
+            animal="Racoon"
+            submittedAt="Feb 24 at 12 pm"
+            submitter="Chad"
+            comment="Oh shit, a racoon!"
+            onClick={() => console.log("hey hey hey")}
           />
           <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submittedBy={'submitted by'}
+            animal="Racoon"
+            submittedAt="Feb 24 at 12 pm"
+            submitter="Chad"
+            comment="Oh shit, a racoon!"
+            onClick={() => console.log("hey hey hey")}
           />
           <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submittedBy={'submitted by'}
+            animal="Racoon"
+            submittedAt="Feb 24 at 12 pm"
+            submitter="Chad"
+            comment="Oh shit, a racoon!"
+            onClick={() => console.log("hey hey hey")}
           />
           <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submittedBy={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submittedBy={'submitted by'}
+            animal="Racoon"
+            submittedAt="Feb 24 at 12 pm"
+            submitter="Chad"
+            comment="Oh shit, a racoon!"
+            onClick={() => console.log("hey hey hey")}
           />
         </div>
         <div className="MapContainer">
