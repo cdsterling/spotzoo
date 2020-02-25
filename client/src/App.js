@@ -10,10 +10,10 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
 
-const MAPBOX_TOKEN = process.env.REACT_APP_TOKEN;
 import Home from './components/pages/Home/Home.js';
 import Contribute from './components/pages/Contribute/Contribute.js';
 import Spotting from './components/pages/Spotting/Spotting.js';
+const MAPBOX_TOKEN = process.env.REACT_APP_TOKEN;
 
 class App extends Component {
 
@@ -158,13 +158,13 @@ class App extends Component {
             contributeLink='/contribute'
           />
         </div>
-        <div className="App-mainContent">
+        {/* <div className="App-mainContent">
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/contribute/' component={Contribute} />
             <Route exact path='/spotting/' component={Spotting} />
           </Switch>
-        </div>
+        </div> */}
         
         <div className="SideBarContainer">
 
