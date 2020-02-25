@@ -148,97 +148,19 @@ class App extends Component {
     
     return (
       <div className="App">
-
-
-        <div className="NavBarContainer">
-          <NavBar 
-            homeLink='/'
-            contributeLink='/contribute'
-          />
-        </div>
+        <nav className="App-navigation">
+            <h1 className="App-title">Test</h1>
+            {/* <Link to="/">Home</Link>
+            <Link to="/contribute/">Contribute</Link>
+            <Link to="/spotting/">Spotting</Link> */}
+        </nav>
         <div className="App-mainContent">
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/contribute/' component={Contribute} />
-            <Route exact path='/spotting/' component={Spotting} />
-          </Switch>
-        </div>
-        
-        <div className="SideBarContainer">
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-        </div>
-        <div className="MapContainer">
-        <ReactMapGl
-        {...this.state.viewport}
-        mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-        mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-        onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-        
-        {Object.keys(this.state.userLocation).length !== 0 ? (
-          <Marker
-            className="user"
-            keys ="1"
-            latitude={this.state.userLocation.lat}
-            longitude={this.state.userLocation.long}
-          >
-          
-            <img className = "location-icon" src={User}/>
-          </Marker>
-        ) : ( 
-           <div>Empty</div>
-        )}
-
-        {Object.values(this.state.data).length !==0 ?(
-          this.state.data.map((data,index) => (
-          <Marker
-            className = "markers"
-            keys={data._id}
-            id={data._id}
-            latitude={data.latitude}
-            longitude={data.longitude}
-            
-            >
-            <img className = "location-icon" src={Red} 
-            />
-            {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
-  
-          ))
-        ) : (
-          <div>Empty</div>
-        )}
-          
-
-      </ReactMapGl>
-        </div>
+            <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/contribute/' component={Contribute} />
+                <Route exact path='/spotting/' component={Spotting} />
+            </Switch>
+        </div>                
       </div>
     );
   }
