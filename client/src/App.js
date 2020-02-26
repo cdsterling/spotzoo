@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import mapboxgl from 'mapbox-gl'
 import { Link, Switch, Route } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
+import mapboxgl from 'mapbox-gl' 
 import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
@@ -12,41 +12,6 @@ import Home from './components/pages/Home/Home.js';
 import Contribute from './components/pages/Contribute/Contribute.js';
 
 
-// Component - Pages
-// import Welcome from './components/pages/Welcome/Welcome.js';
-
-// animal_data = [
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         spot_time:"7:22 AM",
-//         animalType: "Goose"
-//     }
-
-
-// ]
 
 
 class App extends Component {
@@ -186,16 +151,31 @@ class App extends Component {
         {/* Links go here */}
         <div className="NavBarContainer">
           <NavBar 
-            homeLink='/'
+            homeLink='/home'
             contributeLink='/contribute'
           />
         </div>
+
+
         <div className="App-mainContent">
           <Switch>
-            <Route exact path='/home/' component={Home} />
+            <Route 
+                exact path='/home/' 
+                render={() => <Home 
+                                viewport={this.state.viewport}
+                                mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+                                onViewportChange = {() => this.onViewportChange()}
+                                userLocation = {this.state.userLocation}
+                                data = {this.state.data}
+                                distance = {this.state.distance}         
+                              />
+                        } 
+            />
             <Route exact path='/contribute/' component={Contribute} />
           </Switch>
         </div>
+
+
         <div className="SideBarContainer">
           <SmallCard 
             emoji={'🐇'}

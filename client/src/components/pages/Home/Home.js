@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import NavBar from '../../NavBar/NavBar.js';
+import Sidebar from '../../SideBar/SideBar.js';
+
+import SmallCard from '../../SmallCard/SmallCard.js';
+
+import mapboxgl from 'mapbox-gl' 
+import ReactMapGl,{Marker} from "react-map-gl"
+import Red from "../../../red_marker.png"
+import User from "../../../user.png"
+
 
 import './Home.css';
 class Home extends Component {
+//PROPS:
+//viewport
+// mapboxApiAccessToken
+// viewportChange
+// userLocation
+// data
+// distance
+//
 
+    state = {
+
+    };
 
     render(){
         return (
             <div className="Home">
-              {/* Links go here */}
               <div className="NavBarContainer">
                 <NavBar 
                   homeLink='/'
                   contributeLink='/contribute'
                 />
               </div>
-              <div className="App-mainContent">
-                <Switch>
-                  <Route exact path='/home/' component={Home} />
-                  <Route exact path='/contribute/' component={Contribute} />
-                </Switch>
-              </div>
+              
               <div className="SideBarContainer">
-                <SmallCard 
+                <Sidebar
+                    sideBarFill = "animals"
+                    animalData = {this.props.data}
+                />
+
+              
+                {/* <SmallCard 
                   emoji={'🐇'}
                   name={'name'}
                   timestamp={'timestamp'}
@@ -51,21 +72,21 @@ class Home extends Component {
                   name={'name'}
                   timestamp={'timestamp'}
                   submitted_by={'submitted by'}
-                />
+                /> */}
               </div>
               <div className="MapContainer">
               <ReactMapGl
-              {...this.state.viewport}
-              mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+              {...this.props.viewport}
+              mapboxApiAccessToken = {this.props.mapboxApiAccessToken}
               mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-              onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
+              onViewportChange={(viewport) => this.props.onViewportChange(viewport)}> 
               
-              {Object.keys(this.state.userLocation).length !== 0 ? (
+              {Object.keys(this.props.userLocation).length !== 0 ? (
                 <Marker
                   className="user"
                   keys ="1"
-                  latitude={this.state.userLocation.lat}
-                  longitude={this.state.userLocation.long}
+                  latitude={this.props.userLocation.lat}
+                  longitude={this.props.userLocation.long}
                 >
                 
                   <img className = "location-icon" src={User}/>
@@ -74,8 +95,8 @@ class Home extends Component {
                  <div>Empty</div>
               )}
       
-              {Object.values(this.state.data).length !==0 ?(
-                this.state.data.map((data,index) => (
+              {Object.values(this.props.data).length !==0 ?(
+                this.props.data.map((data,index) => (
                 <Marker
                   className = "markers"
                   keys={data._id}
@@ -86,7 +107,7 @@ class Home extends Component {
                   >
                   <img className = "location-icon" src={Red} 
                   />
-                  {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
+                  {this.props.distance[data._id]} <br/> {data.animal}  </Marker>
         
                 ))
               ) : (

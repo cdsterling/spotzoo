@@ -12,7 +12,7 @@ class SmallCard extends Component {
             {emoji}
         </div>
         <div className="SmallCard-text">
-          <p>{name}</p>
+          <p>{this.props.name}, {name}</p>
           <p>{timestamp}</p>
           <p>{submitted_by}</p>
         </div>
