@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import mapboxgl from 'mapbox-gl'
+import { Link, Switch, Route } from 'react-router-dom';
 
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
