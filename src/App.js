@@ -3,6 +3,7 @@ import './App.css';
 
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
+import AddCard from './components/AddCard/AddCard.js';
 
 class App extends Component {
 
@@ -20,37 +21,15 @@ class App extends Component {
         </div>
         {/* switch/routes go here */}
         <div className="SideBarContainer">
-          <SmallCard 
-            animal="Racoon"
-            submittedAt="Feb 24 at 12 pm"
+          <AddCard 
+            animalOptions={["Racoon", "Frog"]}
             submitter="Chad"
             comment="Oh shit, a racoon!"
-            onClick={() => console.log("hey hey hey")}
-          />
-          <SmallCard 
-            animal="Racoon"
-            submittedAt="Feb 24 at 12 pm"
-            submitter="Chad"
-            comment="Oh shit, a racoon!"
-            onClick={() => console.log("hey hey hey")}
-          />
-          <SmallCard 
-            animal="Racoon"
-            submittedAt="Feb 24 at 12 pm"
-            submitter="Chad"
-            comment="Oh shit, a racoon!"
-            onClick={() => console.log("hey hey hey")}
-          />
-          <SmallCard 
-            animal="Racoon"
-            submittedAt="Feb 24 at 12 pm"
-            submitter="Chad"
-            comment="Oh shit, a racoon!"
-            onClick={() => console.log("hey hey hey")}
+            onSubmit={() => console.log("hey hey hey")}
           />
         </div>
         <div className="MapContainer">
-          Map
+          
         </div>
       </div>
     );
