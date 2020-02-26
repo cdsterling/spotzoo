@@ -8,6 +8,9 @@ import SmallCard from './components/SmallCard/SmallCard.js';
 import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
+import Home from './components/pages/Home/Home.js';
+import Contribute from './components/pages/Contribute/Contribute.js';
+
 
 // Component - Pages
 // import Welcome from './components/pages/Welcome/Welcome.js';
@@ -187,7 +190,12 @@ class App extends Component {
             contributeLink='/contribute'
           />
         </div>
-        {/* switch/routes go here */}
+        <div className="App-mainContent">
+          <Switch>
+            <Route exact path='/home/' component={Home} />
+            <Route exact path='/contribute/' component={Contribute} />
+          </Switch>
+        </div>
         <div className="SideBarContainer">
           <SmallCard 
             emoji={'🐇'}
