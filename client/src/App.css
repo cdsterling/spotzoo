@@ -42,3 +42,12 @@
   display: flex;
   /* overflow: hidden; */
 }
+
+.markers{
+  color: red;
+}
+
+img {
+  width: 30px;
+  height: 30px
+}
