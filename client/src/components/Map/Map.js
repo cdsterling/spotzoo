@@ -1,5 +1,7 @@
+
 import React, { Component } from 'react';
-import './Map.css'
+import './Map.css';
+import mapboxgl from 'mapbox-gl'
 import ReactMapGl,{Marker} from "react-map-gl"
 import PetsIcon from "@material-ui/icons/Pets"
 import User from "../../user.png"
@@ -139,6 +141,7 @@ export default MapOne
             //     <img className = "location-icon" src={this.props.Red} 
             //     />
             //     </Marker>
+<<<<<<< HEAD
 
 
 
@@ -169,3 +172,5 @@ export default MapOne
             
     
         //   </ReactMapGl>
+=======
+>>>>>>> ca66412189d0aae9dc8cdc8045a256925469c075

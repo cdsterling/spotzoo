@@ -110,7 +110,6 @@ class App extends Component {
        viewport.latitude = setUserLocation.lat;
        viewport.zoom = 12;
        this.setState({viewport})
-      //  this.state.viewport.longitude = position.coords.longitude;
     });
   };    
     
@@ -127,9 +126,6 @@ class App extends Component {
   }
 
   // Api call grab data from mongodb
-
-  // this.setState({data}, () => console.log('data fetched...', data)
-  //       dataOne.push(data);
   onFetch() {
     console.log('runing')
     let dataOne = []
@@ -197,6 +193,7 @@ class App extends Component {
   
         });
   }
+  // Onclick for smallcards function
     onClicked =(id) => {
       if (Object.keys(this.state.clicked).length === 0 || id !== this.state.clicked["_id"])
       {
@@ -283,71 +280,9 @@ class App extends Component {
             submitted_by={'submitted by'}
           />
         </div>
-       
+        </div>
+   
 
-        <div className="MapContainer">
-      
-        <ReactMapGl
-        {...this.state.viewport}
-        mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-        mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-        onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-      
-        {Object.keys(this.state.userLocation).length !== 0 ? (
-          <Marker
-            className="user"
-            keys ="1"
-            latitude={this.state.userLocation.lat}
-            longitude={this.state.userLocation.long}
-          >
-          
-            <img className = "location-icon" src={User}/>
-          </Marker>
-        ) : ( 
-          <div>Empty</div>
-        )}
-      
-        {Object.values(this.state.data).length !==0 ?(
-          this.state.data.map((data,index) => (
-          <Marker
-            className = "markers"
-            keys={data._id}
-            id={data._id}
-            latitude={data.latitude}
-            longitude={data.longitude}
-            
-            >
-            <PetsIcon/>
-      
-           <br/> {this.state.distance[data._id]} <br/> <span> {data.animal} </span>  </Marker>
-      
-          ))
-        ) : (
-          <div>Empty</div>
-        )}
-      
-        </ReactMapGl>
-        
-       
-  </div>
-  <div className="form">
-  <form>
-    <label>
-      Name:
-      <input type="text" name="animal" value={this.state.animal} onChange={this.onChangeContent}/>
-    </label>
-    <label>
-      Comment:
-      <input type="text" name="comment" value={this.state.comment} onChange={this.onChangeComment}/>
-    </label>
-    <label>
-      submitter:
-      <input type="text" name="submitter" value={this.state.submitter} onChange={this.onChangeSubmitter}/>
-    </label>
-    <input type="submit" value="Submit" onClick ={this.submit} />
-  </form>
-</div>
-</div>
 );
 }
 }
@@ -355,50 +290,3 @@ class App extends Component {
 export default App;
 
 
-  // <ReactMapGl
-  // {...this.state.viewport}
-  // mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-  // mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-  // onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-
-  // {Object.keys(this.state.userLocation).length !== 0 ? (
-  //   <Marker
-  //     className="user"
-  //     keys ="1"
-  //     latitude={this.state.userLocation.lat}
-  //     longitude={this.state.userLocation.long}
-  //   >
-    
-  //     <img className = "location-icon" src={User}/>
-  //   </Marker>
-  // ) : ( 
-  //   <div>Empty</div>
-  // )}
-
-  // {Object.values(this.state.data).length !==0 ?(
-  //   this.state.data.map((data,index) => (
-  //   <Marker
-  //     className = "markers"
-  //     keys={data._id}
-  //     id={data._id}
-  //     latitude={data.latitude}
-  //     longitude={data.longitude}
-      
-  //     >
-  //     <img className = "location-icon" src={data.emoji}/>
-
-  //     {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
-
-  //   ))
-  // ) : (
-  //   <div>Empty</div>
-  // )}
-
-  // </ReactMapGl>
-
-
-
-
-
-
-             
