@@ -149,7 +149,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* Links go here */}
-        <div className="NavBarContainer">
+        <div className="NavBarContainer APPJS">
           <NavBar 
             homeLink='/home'
             contributeLink='/contribute'
@@ -176,8 +176,14 @@ class App extends Component {
         </div>
 
 
-        <div className="SideBarContainer">
+        <div className="SideBarContainer APPJS">
           <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          {/* <SmallCard 
             emoji={'🐇'}
             name={'name'}
             timestamp={'timestamp'}
@@ -200,15 +206,9 @@ class App extends Component {
             name={'name'}
             timestamp={'timestamp'}
             submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
+          /> */}
         </div>
-        <div className="MapContainer">
+        <div className="MapContainer APPJS">
         <ReactMapGl
         {...this.state.viewport}
         mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}

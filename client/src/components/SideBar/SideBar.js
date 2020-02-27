@@ -5,28 +5,21 @@ import SmallCard from '../SmallCard/SmallCard.js';
 import './SideBar.css';
 class Sidebar extends Component {
     render(){
+        console.log("Entering Sidebar Renter");
 
         return(
             <div className="SideBarContainer">
-                {this.props.SidebarFill =="animals" ?(
-                    
-                        this.props.animalData.map((data,index) => (
+                { 
+                    this.props.animalData.map((data) => (
                             <SmallCard
-                                name = {data.animal}
-                                timestamp = {data.timestamp}
-                                submitted_by = {data.submitter}
+                                animal = {data.animal}
+                                submittedAt ={data.time}
+                                submitter = {data.submitter}
+                                comment = {data.comment}
                             />
                         ))
                     
-                ) : (
-
-                    <div>Empty</div>
-                )}
-
-                
-                
-
-
+                }
             </div>
         )
     }

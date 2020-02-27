@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 
 import './SmallCard.css';
-import Card from '@material-ui/core/Card';
+import {Card, CardMedia, Typography, Subtitle2, CardActions, CardActionArea, CardContent, CardHeader, Collapse, IconButton} from '@material-ui/core';
 
 class SmallCard extends Component {
+
   render() {
-    const {emoji, name, timestamp, submitted_by} = this.props;
+    const { animal, submittedAt, submitter, comment, onClick } = this.props;
+    console.log("Entering SmallCard Render", animal, submittedAt, submitter, comment);
+
     return (
-    <Card className="SmallCard">
-        <div className="SmallCard-thumbnail">
-            {emoji}
+    <Card className='SmallCard' square="true">
+      <CardActionArea onClick={onClick} >
+      <CardHeader title={animal} subheader={`Spotted by ${submitter} on ${submittedAt}`} style={{paddingBottom: "0"}} />
+      <CardContent square={true} className='SmallCard-content'>
+        <CardMedia style={{ height: 0, paddingTop: '50%'}} image={require ('./racoon.jpg')} className="SmallCard-image" />
+        <div className='SmallCard-primary'>
+          <Typography variant="subtitle2" align="center" gutterBottom className="SmallCard-primary-details">
+            {comment}
+          </Typography>
         </div>
-        <div className="SmallCard-text">
-          <p>{this.props.name}, {name}</p>
-          <p>{timestamp}</p>
-          <p>{submitted_by}</p>
-        </div>
+      </CardContent>
+      </CardActionArea>
     </Card>
     );
   }

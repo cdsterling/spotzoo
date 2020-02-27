@@ -29,14 +29,14 @@ class Home extends Component {
     render(){
         return (
             <div className="Home">
-              <div className="NavBarContainer">
+              <div className="NavBarContainer HOMEJS">
                 <NavBar 
                   homeLink='/'
                   contributeLink='/contribute'
                 />
               </div>
               
-              <div className="SideBarContainer">
+              <div className="SideBarContainer HOMEJS">
                 <Sidebar
                     sideBarFill = "animals"
                     animalData = {this.props.data}
