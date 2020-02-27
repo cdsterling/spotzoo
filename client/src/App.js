@@ -1,20 +1,59 @@
 import React, { Component } from 'react';
-import { Link, Switch, Route } from 'react-router-dom'
-
+import './App.css';
 import mapboxgl from 'mapbox-gl'
+
+import NavBar from './components/NavBar/NavBar.js';
+import SmallCard from './components/SmallCard/SmallCard.js';
+import MapOne from './components/Map/Map.js';
 import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
+import PetsIcon from '@material-ui/icons/Pets';
+import { Icon } from '@material-ui/core';
 
+<<<<<<< HEAD
 import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
 import AddCard from './components/AddCard/AddCard.js';
+=======
+// Component - Pages
+// import Welcome from './components/pages/Welcome/Welcome.js';
 
-import Home from './components/pages/Home/Home.js';
-import Contribute from './components/pages/Contribute/Contribute.js';
-import Spotting from './components/pages/Spotting/Spotting.js';
-const MAPBOX_TOKEN = process.env.REACT_APP_TOKEN;
+// animal_data = [
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         time:"7:22 AM",
+//         animalType: "Goose"
+//     },
+//     { 
+//         name: "Lake Goose",
+//         latitude: 1.22,
+//         longitude: 3.22,
+//         spot_time:"7:22 AM",
+//         animalType: "Goose"
+//     }
+
+
+// ]
+>>>>>>> marby
+
 
 class App extends Component {
 
@@ -32,11 +71,16 @@ class App extends Component {
         height: '100vh',
         latitude: 37.6162,
         longitude: -122.0884,
-        zoom: 10
+        zoom: 13
       },
       userLocation : {},
       data:[],
-      distance : []
+      distance : [],
+      animals:[],
+      animal:"name",
+      submitter:"submitter",
+      comment:"comment",
+      clicked:{}
       
     };
   
@@ -49,6 +93,7 @@ class App extends Component {
        let setUserLocation = {
            lat: position.coords.latitude,
            long: position.coords.longitude
+           
         }; 
         // distance to markers
         let distanceOne = {}
@@ -61,15 +106,17 @@ class App extends Component {
             distanceOne[id] = miles;     
           } 
         this.setState({
-          distance : distanceOne,
+          distance : distanceOne
+        })
+        console.log(this.state.distance)
+        this.setState({
           userLocation: setUserLocation,
-          viewport: {
-            latitude :position.coords.latitude,
-            longitude : position.coords.longitude
-          }
-
-        });
-        
+       });
+       let viewport = {...this.state.viewport}
+       viewport.longitude = setUserLocation.long;
+       viewport.latitude = setUserLocation.lat;
+       viewport.zoom = 12;
+       this.setState({viewport})
     });
   };    
     
@@ -86,9 +133,6 @@ class App extends Component {
   }
 
   // Api call grab data from mongodb
-
-  // this.setState({data}, () => console.log('data fetched...', data)
-  //       dataOne.push(data);
   onFetch() {
     console.log('runing')
     let dataOne = []
@@ -97,18 +141,35 @@ class App extends Component {
         .then(data => {
           console.log('receiving data', data);
           dataOne.push(data);
-        //   this.setState({data});
+          this.setState({data});
           console.log(dataOne)
 
           this.setUserLocation();
           
                  
         });
-      }
+    fetch('/api/mongodb/animals/')
+        .then(res => res.json())
+        .then(animals => {
+          console.log('receiving data', animals);
+          this.setState({animals});
+          console.log(animals)
+          })
+  }
 
   onChangeContent = (ev) => {
     this.setState({
-      name : ev.target.value,
+      animal : ev.target.value,
+    });
+  }
+  onChangeSubmitter = (ev) => {
+    this.setState({
+      submitter : ev.target.value,
+    });
+  }
+  onChangeComment = (ev) => {
+    this.setState({
+      comment : ev.target.value,
     });
   }
 
@@ -118,12 +179,12 @@ class App extends Component {
     
       const formData = {
 
-        animal : this.state.name,
+        animal : this.state.animal,
         latitude: this.state.userLocation.lat,
         longitude: this.state.userLocation.long, 
-        date : date,
         comment :this.state.comment,
         submitter : this.state.submitter,
+        time : String(date),
 
       };
       console.log(this.state.name)
@@ -139,6 +200,35 @@ class App extends Component {
   
         });
   }
+  // Onclick for smallcards function
+    onClicked =(id) => {
+      if (Object.keys(this.state.clicked).length === 0 || id !== this.state.clicked["_id"])
+      {
+        for(let i of this.state.data){
+          
+          if (id === i._id){
+            this.setState({clicked:i})
+            console.log(this.state.clicked)
+            let viewport = {...this.state.viewport}
+            viewport.longitude = i.longitude;
+            viewport.latitude = i.latitude;
+            viewport.zoom = 17;
+            this.setState({viewport})
+  
+          }
+        }
+      }
+      if (id === this.state.clicked["_id"]){
+        let viewport = {...this.state.viewport}
+        viewport.longitude = this.state.userLocation.long;
+        viewport.latitude = this.state.userLocation.lat;
+        viewport.zoom = 17;
+        this.setState({viewport})
+        this.setState({clicked:{}})
+
+      }
+
+    }
   componentDidMount(){
     
     this.onFetch();  
@@ -149,24 +239,54 @@ class App extends Component {
   render () {
     
     
+    
     return (
       <div className="App">
+<<<<<<< HEAD
+=======
+        {/* Links go here */}
+>>>>>>> marby
         <div className="NavBarContainer">
           <NavBar 
             homeLink='/'
             contributeLink='/contribute'
           />
         </div>
-        {/* <div className="App-mainContent">
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/contribute/' component={Contribute} />
-            <Route exact path='/spotting/' component={Spotting} />
-          </Switch>
-        </div> */}
-        
+        {/* switch/routes go here */}
         <div className="SideBarContainer">
+<<<<<<< HEAD
           {/* Component Examples */}
+=======
+        {this.state.data.map(data =>(
+          <SmallCard 
+            id= {data._id}
+            emoji={'🐇'}
+            name={data.animal}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+            onClick={() => this.onClicked(data._id)}
+
+          />
+          ))}
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+          <SmallCard 
+            emoji={'🐇'}
+            name={'name'}
+            timestamp={'timestamp'}
+            submitted_by={'submitted by'}
+          />
+>>>>>>> marby
           <SmallCard 
             animal={'Racoon'}
             submittedAt={'April 1st at 12pm'}
@@ -181,56 +301,14 @@ class App extends Component {
             comment={''}
             // onSubmit={}
           />
-          
         </div>
-
-        <div className="MapContainer">
-
-            <ReactMapGl
-                {...this.state.viewport}
-                mapboxApiAccessToken = {MAPBOX_TOKEN}
-                mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-                onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-                
-                {Object.keys(this.state.userLocation).length !== 0 ? (
-                <Marker
-                    className="user"
-                    keys ="1"
-                    latitude={this.state.userLocation.lat}
-                    longitude={this.state.userLocation.long}
-                >
-            
-                    <img className = "location-icon" alt="location-icon" src={User}/>
-                </Marker>
-                ) : ( 
-                <div>Empty</div>
-                )}
-
-                {Object.values(this.state.data).length !==0 ?(
-                this.state.data.map((data,index) => (
-                <Marker
-                    className = "markers"
-                    keys={data._id}
-                    id={data._id}
-                    latitude={data.latitude}
-                    longitude={data.longitude}
-                    
-                    >
-                    <img className = "location-icon" alt="location-icon" src={Red} 
-                    />
-                    {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
-        
-                ))
-                ) : (
-                <div>Empty</div>
-                )}
-            
-
-            </ReactMapGl>
         </div>
-      </div>
-    );
-  }
+   
+
+);
+}
 }
 
 export default App;
+
+

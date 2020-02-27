@@ -8,6 +8,7 @@ class SmallCard extends Component {
   render() {
     const { animal, submittedAt, submitter, comment, onClick } = this.props;
     return (
+<<<<<<< HEAD
     <Card className='SmallCard' square="true">
       <CardActionArea onClick={onClick} >
       <CardHeader title={animal} subheader={`Spotted by ${submitter} on ${submittedAt}`} style={{paddingBottom: "0"}} />
@@ -17,6 +18,16 @@ class SmallCard extends Component {
           <Typography variant="subtitle2" align="center" gutterBottom className="SmallCard-primary-details">
             {comment}
           </Typography>
+=======
+    <Card className="SmallCard">
+        <div className="SmallCard-thumbnail">
+            {emoji}
+        </div>
+        <div className="SmallCard-text" id={this.props.id} > 
+          <p onClick={this.props.onClick} onDoubleClick={this.props.onDoubleClick}>{name}</p>
+          <p>{timestamp}</p>
+          <p>{submitted_by}</p>
+>>>>>>> marby
         </div>
       </CardContent>
       </CardActionArea>
