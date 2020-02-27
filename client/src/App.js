@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl'
 
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
-import MapOne from './components/Map/Map.js';
+import Map from './components/Map/Map.js';
 import ReactMapGl,{Marker} from "react-map-gl"
 import Red from "./red_marker.png"
 import User from "./user.png"
@@ -195,9 +195,6 @@ class App extends Component {
 
 
   render () {
-    
-    
-    
     return (
       <div className="App">
         <div className="NavBarContainer">
@@ -224,7 +221,16 @@ class App extends Component {
             // onSubmit={}
           />
         </div>
+        <div className="MapContainer">
+        <Map 
+          viewport={this.state.viewport}
+          userLocation={this.state.userLocation}
+          data={this.state.data}
+          onViewportChange={this.onViewportChange}
+          distance={this.state.distance}
+        />
         </div>
+      </div>
    
 
 );
