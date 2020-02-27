@@ -64,7 +64,7 @@ class App extends Component {
         height: '100vh',
         latitude: 37.6162,
         longitude: -122.0884,
-        zoom: 10
+        zoom: 13
       },
       userLocation : {},
       data:[],
@@ -72,7 +72,8 @@ class App extends Component {
       animals:[],
       animal:"name",
       submitter:"submitter",
-      comment:"comment"
+      comment:"comment",
+      clicked:{}
       
     };
   
@@ -85,6 +86,7 @@ class App extends Component {
        let setUserLocation = {
            lat: position.coords.latitude,
            long: position.coords.longitude
+           
         }; 
         // distance to markers
         let distanceOne = {}
@@ -103,8 +105,12 @@ class App extends Component {
         this.setState({
           userLocation: setUserLocation,
        });
-       this.state.viewport.latitude = position.coords.latitude;
-       this.state.viewport.longitude = position.coords.longitude;
+       let viewport = {...this.state.viewport}
+       viewport.longitude = setUserLocation.long;
+       viewport.latitude = setUserLocation.lat;
+       viewport.zoom = 12;
+       this.setState({viewport})
+      //  this.state.viewport.longitude = position.coords.longitude;
     });
   };    
     
@@ -176,7 +182,6 @@ class App extends Component {
         comment :this.state.comment,
         submitter : this.state.submitter,
         time : String(date),
-        emoji:"\u2728"
 
       };
       console.log(this.state.name)
@@ -192,6 +197,34 @@ class App extends Component {
   
         });
   }
+    onClicked =(id) => {
+      if (Object.keys(this.state.clicked).length === 0 || id !== this.state.clicked["_id"])
+      {
+        for(let i of this.state.data){
+          
+          if (id === i._id){
+            this.setState({clicked:i})
+            console.log(this.state.clicked)
+            let viewport = {...this.state.viewport}
+            viewport.longitude = i.longitude;
+            viewport.latitude = i.latitude;
+            viewport.zoom = 17;
+            this.setState({viewport})
+  
+          }
+        }
+      }
+      if (id === this.state.clicked["_id"]){
+        let viewport = {...this.state.viewport}
+        viewport.longitude = this.state.userLocation.long;
+        viewport.latitude = this.state.userLocation.lat;
+        viewport.zoom = 17;
+        this.setState({viewport})
+        this.setState({clicked:{}})
+
+      }
+
+    }
   componentDidMount(){
     
     this.onFetch();  
@@ -200,7 +233,7 @@ class App extends Component {
 
 
   render () {
-    const One = Object.keys(this.state.userLocation).length
+    
     
     
     return (
@@ -214,12 +247,17 @@ class App extends Component {
         </div>
         {/* switch/routes go here */}
         <div className="SideBarContainer">
+        {this.state.data.map(data =>(
           <SmallCard 
+            id= {data._id}
             emoji={'🐇'}
-            name={'name'}
+            name={data.animal}
             timestamp={'timestamp'}
             submitted_by={'submitted by'}
+            onClick={() => this.onClicked(data._id)}
+
           />
+          ))}
           <SmallCard 
             emoji={'🐇'}
             name={'name'}
@@ -245,48 +283,50 @@ class App extends Component {
             submitted_by={'submitted by'}
           />
         </div>
+       
+
         <div className="MapContainer">
-
-                <ReactMapGl
-                {...this.state.viewport}
-                mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-                mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-                onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
-
-                {Object.keys(this.state.userLocation).length !== 0 ? (
-                  <Marker
-                    className="user"
-                    keys ="1"
-                    latitude={this.state.userLocation.lat}
-                    longitude={this.state.userLocation.long}
-                  >
-                  
-                    <img className = "location-icon" src={User}/>
-                  </Marker>
-                ) : ( 
-                  <div>Empty</div>
-                )}
-
-                {Object.values(this.state.data).length !==0 ?(
-                  this.state.data.map((data,index) => (
-                  <Marker
-                    className = "markers"
-                    keys={data._id}
-                    id={data._id}
-                    latitude={data.latitude}
-                    longitude={data.longitude}
-                    
-                    >
-                    <PetsIcon/>
-
-                    {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
-
-                  ))
-                ) : (
-                  <div>Empty</div>
-                )}
-
-                </ReactMapGl>
+      
+        <ReactMapGl
+        {...this.state.viewport}
+        mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+        mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
+        onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
+      
+        {Object.keys(this.state.userLocation).length !== 0 ? (
+          <Marker
+            className="user"
+            keys ="1"
+            latitude={this.state.userLocation.lat}
+            longitude={this.state.userLocation.long}
+          >
+          
+            <img className = "location-icon" src={User}/>
+          </Marker>
+        ) : ( 
+          <div>Empty</div>
+        )}
+      
+        {Object.values(this.state.data).length !==0 ?(
+          this.state.data.map((data,index) => (
+          <Marker
+            className = "markers"
+            keys={data._id}
+            id={data._id}
+            latitude={data.latitude}
+            longitude={data.longitude}
+            
+            >
+            <PetsIcon/>
+      
+           <br/> {this.state.distance[data._id]} <br/> <span> {data.animal} </span>  </Marker>
+      
+          ))
+        ) : (
+          <div>Empty</div>
+        )}
+      
+        </ReactMapGl>
         
        
   </div>
@@ -358,10 +398,7 @@ export default App;
 
 
 
-              // <MapOne          
-              // onViewport ={(viewport) => this.onViewportChange(viewport)}
 
-              // userLat ={this.state.userLocation.lat}
-              // userLong ={this.state.userLocation.long}
-              // User ={Red}
-              // />
+
+
+             

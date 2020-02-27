@@ -11,8 +11,8 @@ class SmallCard extends Component {
         <div className="SmallCard-thumbnail">
             {emoji}
         </div>
-        <div className="SmallCard-text">
-          <p>{name}</p>
+        <div className="SmallCard-text" id={this.props.id} > 
+          <p onClick={this.props.onClick} onDoubleClick={this.props.onDoubleClick}>{name}</p>
           <p>{timestamp}</p>
           <p>{submitted_by}</p>
         </div>
