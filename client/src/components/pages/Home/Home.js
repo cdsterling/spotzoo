@@ -20,6 +20,7 @@ class Home extends Component {
         console.log("Home Render function");
         console.log("-->this.props.userLocation:", this.props.userLocation);
         console.log("-->this.props.data:", this.props.data);
+        console.log("-->this.props.viewport:", this.props.viewport);
 
         return (
             <div className="Home">

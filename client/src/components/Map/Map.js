@@ -1,10 +1,12 @@
-
-import React, { Component } from 'react';
-import './Map.css';
+import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import ReactMapGl, { Marker } from "react-map-gl"
 import PetsIcon from "@material-ui/icons/Pets"
 import User from "../../user.png"
+// import ReactMapGl from "react-map-gl"
+
+
+import './Map.css';
 
 
 
@@ -19,13 +21,14 @@ class Map extends Component {
     render() {
         console.log("Entering Map render");
         console.log("--> this.props.data", this.props.data)
+        console.log("--this.props.viewport:", this.props.viewport)
         return (
-            <div classname="MapContainer">
+            <div className="MapContainer">
                 <ReactMapGl
                     {...this.props.viewport}
                     mapboxApiAccessToken={process.env.REACT_APP_TOKEN}
                     mapStyle='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
-                    onViewportChange={() => this.props.onViewportChange(this.props.viewport)}>
+                    onViewportChange={(viewport) => this.props.onViewportChange(viewport)}>
 
                     {Object.keys(this.props.userLocation).length !== 0 ? (
                         <Marker

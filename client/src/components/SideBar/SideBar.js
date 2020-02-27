@@ -5,7 +5,7 @@ import SmallCard from '../SmallCard/SmallCard.js';
 import './SideBar.css';
 class Sidebar extends Component {
     render(){
-        console.log("Entering Sidebar Renter");
+        console.log("Entering Sidebar render method");
 
         return(
             <div className="SideBarContainer">

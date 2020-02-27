@@ -29,7 +29,7 @@ class App extends Component {
       animal_longitude: null,
       animal_spot_time: null,
       animal_animalType: null,
-      "viewport": {
+      viewport: {
         width: '100vw',
         height: '100vh',
         latitude: 37.6162,
@@ -48,11 +48,12 @@ class App extends Component {
     };
   
   onViewportChange = (viewport) => {
-      console.log("Entering onViewportChange method")
+    console.log("Entering onViewportChange method:", viewport)
     this.setState({viewport});
   }
   // User location function
   setUserLocation = () => {
+    console.log("Entering setUserLocaiton method");
     navigator.geolocation.getCurrentPosition(position => {
        let setUserLocation = {
            lat: position.coords.latitude,
@@ -104,12 +105,8 @@ class App extends Component {
         .then(res => res.json())
         .then(data => {
           console.log('receiving data', data);
-          dataOne.push(data);
           this.setState({data});
-          console.log(dataOne)
-
           this.setUserLocation();
-          
                  
         });
     fetch('/api/mongodb/animals/')
@@ -193,11 +190,9 @@ class App extends Component {
       }
 
     }
-  componentDidMount(){
-    
-    this.onFetch();  
-
-  }
+//   componentDidMount(){
+//     this.onFetch();  
+//   }
 
 
   render () {
@@ -219,7 +214,7 @@ class App extends Component {
                 render={() => <Home 
                                 viewport={this.state.viewport}
                                 mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-                                onViewportChange = {() => this.onViewportChange()}
+                                onViewportChange = {(viewport) => this.onViewportChange(viewport)}
                                 userLocation = {this.state.userLocation}
                                 data = {this.state.data}
                                 distance = {this.state.distance}  
