@@ -10,49 +10,7 @@ import Red from "./red_marker.png"
 import User from "./user.png"
 import PetsIcon from '@material-ui/icons/Pets';
 import { Icon } from '@material-ui/core';
-
-<<<<<<< HEAD
-import './App.css';
-import NavBar from './components/NavBar/NavBar.js';
-import SmallCard from './components/SmallCard/SmallCard.js';
 import AddCard from './components/AddCard/AddCard.js';
-=======
-// Component - Pages
-// import Welcome from './components/pages/Welcome/Welcome.js';
-
-// animal_data = [
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         time:"7:22 AM",
-//         animalType: "Goose"
-//     },
-//     { 
-//         name: "Lake Goose",
-//         latitude: 1.22,
-//         longitude: 3.22,
-//         spot_time:"7:22 AM",
-//         animalType: "Goose"
-//     }
-
-
-// ]
->>>>>>> marby
 
 
 class App extends Component {
@@ -242,10 +200,6 @@ class App extends Component {
     
     return (
       <div className="App">
-<<<<<<< HEAD
-=======
-        {/* Links go here */}
->>>>>>> marby
         <div className="NavBarContainer">
           <NavBar 
             homeLink='/'
@@ -254,39 +208,7 @@ class App extends Component {
         </div>
         {/* switch/routes go here */}
         <div className="SideBarContainer">
-<<<<<<< HEAD
           {/* Component Examples */}
-=======
-        {this.state.data.map(data =>(
-          <SmallCard 
-            id= {data._id}
-            emoji={'🐇'}
-            name={data.animal}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-            onClick={() => this.onClicked(data._id)}
-
-          />
-          ))}
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
->>>>>>> marby
           <SmallCard 
             animal={'Racoon'}
             submittedAt={'April 1st at 12pm'}
