@@ -12,6 +12,11 @@ import PetsIcon from '@material-ui/icons/Pets';
 import { Icon } from '@material-ui/core';
 import AddCard from './components/AddCard/AddCard.js';
 
+import { Link, Switch, Route } from 'react-router-dom';
+import Home from './components/pages/Home/Home.js';
+import Contribute from './components/pages/Contribute/Contribute.js';
+
+
 
 class App extends Component {
 
@@ -42,7 +47,8 @@ class App extends Component {
       
     };
   
-  onViewportChange = viewport => {
+  onViewportChange = (viewport) => {
+      console.log("Entering onViewportChange method")
     this.setState({viewport});
   }
   // User location function
@@ -92,7 +98,7 @@ class App extends Component {
 
   // Api call grab data from mongodb
   onFetch() {
-    console.log('runing')
+    console.log('entering method onFetch')
     let dataOne = []
     fetch('/api/mongodb/markers/')
         .then(res => res.json())
@@ -200,30 +206,75 @@ class App extends Component {
     
     return (
       <div className="App">
-        <div className="NavBarContainer">
-          <NavBar 
-            homeLink='/'
-            contributeLink='/contribute'
-          />
+          <div className="NavBarContainer HOMEJS">
+                <NavBar 
+                  homeLink='/'
+                  contributeLink='/contribute'
+                />
+              </div>
+        <div className="App-mainContent">
+          <Switch>
+            <Route 
+                exact path='/home/' 
+                render={() => <Home 
+                                viewport={this.state.viewport}
+                                mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+                                onViewportChange = {() => this.onViewportChange()}
+                                userLocation = {this.state.userLocation}
+                                data = {this.state.data}
+                                distance = {this.state.distance}  
+                                onFetch = {() => this.onFetch()}       
+                              />
+                        } 
+            />
+            <Route exact path='/contribute/' component={Contribute} />
+          </Switch>
         </div>
-        {/* switch/routes go here */}
-        <div className="SideBarContainer">
-          {/* Component Examples */}
-          <SmallCard 
-            animal={'Racoon'}
-            submittedAt={'April 1st at 12pm'}
-            submitter={'Chad'}
-            comment={'Watch out! A Racoon!'}
-            // onClick={}
-          />
-          <AddCard 
-            animal={''}
-            animalOptions={['Racoon', 'Bear']}
-            submitter={''}
-            comment={''}
-            // onSubmit={}
-          />
-        </div>
+
+        {/* <div className="MapContainer">
+              <ReactMapGl
+              {...this.state.viewport}
+              mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+              mapStyle ='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
+              onViewportChange={(viewport) => this.onViewportChange(viewport)}> 
+              
+              {Object.keys(this.state.userLocation).length !== 0 ? (
+                <Marker
+                  className="user"
+                  keys ="1"
+                  latitude={this.state.userLocation.lat}
+                  longitude={this.state.userLocation.long}
+                >
+                
+                  <img className = "location-icon" src={User}/>
+                </Marker>
+              ) : ( 
+                 <div>Empty</div>
+              )}
+      
+              {Object.values(this.state.data).length !==0 ?(
+                this.state.data.map((data,index) => (
+                <Marker
+                  className = "markers"
+                  keys={data._id}
+                  id={data._id}
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                  
+                  >
+                  <img className = "location-icon" src={Red} 
+                  />
+                  {this.state.distance[data._id]} <br/> {data.animal}  </Marker>
+        
+                ))
+              ) : (
+                <div>Empty</div>
+              )}
+                
+      
+            </ReactMapGl>
+              </div> */}
+        
         </div>
    
 
