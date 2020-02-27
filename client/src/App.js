@@ -195,6 +195,7 @@ class App extends Component {
 
 
   render () {
+    console.log('rendering');
     return (
       <div className="App">
         <div className="NavBarContainer">
@@ -222,6 +223,7 @@ class App extends Component {
           />
         </div>
         <div className="MapContainer">
+        {this.state.data !== null ? (
         <Map 
           viewport={this.state.viewport}
           userLocation={this.state.userLocation}
@@ -229,6 +231,9 @@ class App extends Component {
           onViewportChange={this.onViewportChange}
           distance={this.state.distance}
         />
+        ) : 
+        (<div>Loading</div>)
+        }
         </div>
       </div>
    
