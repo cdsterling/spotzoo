@@ -215,7 +215,7 @@ class App extends Component {
         <div className="App-mainContent">
           <Switch>
             <Route 
-                exact path='/home/' 
+                exact path='/' 
                 render={() => <Home 
                                 viewport={this.state.viewport}
                                 mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
