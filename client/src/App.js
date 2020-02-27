@@ -9,6 +9,7 @@ import User from "./user.png"
 import './App.css';
 import NavBar from './components/NavBar/NavBar.js';
 import SmallCard from './components/SmallCard/SmallCard.js';
+import AddCard from './components/AddCard/AddCard.js';
 
 import Home from './components/pages/Home/Home.js';
 import Contribute from './components/pages/Contribute/Contribute.js';
@@ -150,8 +151,6 @@ class App extends Component {
     
     return (
       <div className="App">
-
-
         <div className="NavBarContainer">
           <NavBar 
             homeLink='/'
@@ -167,22 +166,20 @@ class App extends Component {
         </div> */}
         
         <div className="SideBarContainer">
-
-          {/* {
-            this.state.animal_details.map( animal => (
-              <SmallCard 
-              emoji={'🐇'}
-              name={animal.name}
-              timestamp={animal.time}
-              submitted_by={animal.spotter}
-              />
-            )
-          )} */}
+          {/* Component Examples */}
           <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
+            animal={'Racoon'}
+            submittedAt={'April 1st at 12pm'}
+            submitter={'Chad'}
+            comment={'Watch out! A Racoon!'}
+            // onClick={}
+          />
+          <AddCard 
+            animal={''}
+            animalOptions={['Racoon', 'Bear']}
+            submitter={''}
+            comment={''}
+            // onSubmit={}
           />
           
         </div>
