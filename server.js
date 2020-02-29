@@ -19,12 +19,9 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 const ObjectId = require('mongodb').ObjectId;
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://marby123:marby123@cluster0-itdny.mongodb.net/spotzoo1";
 const MONGODB_DATABASE = 'spotzoo1';
-const path = require("path");
 
-
-app.use(express.static(path.join(__dirname, "client", "build")))
 
 app.get('/api/mongodb/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
@@ -41,7 +38,7 @@ app.get('/api/mongodb/:collectionName/', (request, response) => {
 });
 
 app.post('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionN ame;
+  const collectionName = request.params.collectionName;
   const data = request.body;
   console.log("method app.POST is invoked, data:", data);
 
@@ -101,12 +98,7 @@ MongoClient.connect(MONGODB_URL, (err, client) => {
   console.log("--MongoDB connection successful");
   db = client.db(MONGODB_DATABASE);
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  });
-
   app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
-    console.log(`Mongo Url ${MONGODB_URL}`)
   })
 });
