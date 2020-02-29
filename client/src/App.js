@@ -149,7 +149,7 @@ class App extends Component {
         .then(response => response.json())
         .then(data => {
           console.log('Got this back', data);
-  
+          this.onFetch()
         });
   }
   // Onclick for smallcards function
@@ -232,7 +232,7 @@ class App extends Component {
                     onInputChange = {this.onInputChange}
                     distance = {this.state.distance}  
                     onFetch = {() => this.onFetch()}       
-                    // onClick
+                    onClick = {this.submit}
                     />
                   } 
                   />
