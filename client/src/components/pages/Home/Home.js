@@ -11,6 +11,7 @@ class Home extends Component {
         <Sidebar
           cardComponent = "SmallCard"
           data = {sideBarData}
+          onClick = {this.props.onClick}
         />
         <Map
           viewport={this.props.viewport}
