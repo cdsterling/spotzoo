@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardMedia, Typography, CardActionArea, CardContent, CardHeader} from '@material-ui/core';
+import {Card, Typography, CardActionArea, CardContent, CardHeader} from '@material-ui/core';
 import { format } from 'date-fns'
 import './SmallCard.css';
 import CardImage from '../CardImage/CardImage.js'

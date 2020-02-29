@@ -3,14 +3,6 @@ import './App.css';
 import mapboxgl from 'mapbox-gl'
 
 import NavBar from './components/NavBar/NavBar.js';
-import SmallCard from './components/SmallCard/SmallCard.js';
-import MapOne from './components/Map/Map.js';
-import ReactMapGl,{Marker} from "react-map-gl"
-import Red from "./red_marker.png"
-import User from "./user.png"
-import PetsIcon from '@material-ui/icons/Pets';
-import { Icon } from '@material-ui/core';
-import AddCard from './components/AddCard/AddCard.js';
 
 import { Link, Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home/Home.js';
@@ -24,7 +16,6 @@ class App extends Component {
     animal_details: null,
     filter: "",
     highlighted_animal: null,
-    animal_name: "",
     animal_latitude: null,
     animal_longitude: null,
     animal_spot_time: null,
@@ -48,12 +39,10 @@ class App extends Component {
   };
   
   onViewportChange = (viewport) => {
-    console.log("Entering onViewportChange method:", viewport)
     this.setState({viewport});
   }
   // User location function
   setUserLocation = () => {
-    console.log("Entering setUserLocaiton method");
     navigator.geolocation.getCurrentPosition(position => {
        let setUserLocation = {
            lat: position.coords.latitude,
@@ -92,14 +81,12 @@ class App extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Got this back', data);
         this.onFetch();
       });
   }
 
   // Api call grab data from mongodb
   onFetch() {
-    console.log('entering method onFetch')
     let dataOne = []
     fetch('/api/mongodb/markers/')
         .then(res => res.json())
@@ -127,30 +114,34 @@ class App extends Component {
 
   //Post function// create new markers, store data into database
   submit = () => {
-      var date = new Date();
-    
-      const formData = {
-
-        animal : this.state.animal,
-        latitude: this.state.userLocation.lat,
-        longitude: this.state.userLocation.long, 
-        comment :this.state.comment,
-        submitter : this.state.submitter,
-        time : String(date),
-
-      };
-      console.log(this.state.name)
+    console.log('submitting new marker');
+    const date = new Date();
   
-      fetch('/api/mongodb/markers/', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(formData),
+    const formData = {
+      animal : this.state.animal,
+      latitude: this.state.userLocation.lat,
+      longitude: this.state.userLocation.long, 
+      comment :this.state.comment,
+      submitter : this.state.submitter,
+      time : String(date),
+    };
+
+    fetch('/api/mongodb/markers/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // reset form
+        this.setState({
+          animal: "", 
+          submitter: "", 
+          comment: "",
         })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Got this back', data);
-          this.onFetch()
-        });
+        
+        this.onFetch()
+      });
   }
   // Onclick for smallcards function
     onClicked =(id) => {

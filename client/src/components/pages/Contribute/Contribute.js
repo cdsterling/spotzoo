@@ -7,19 +7,14 @@ import './Contribute.css';
 class Contribute extends Component {
 
 render(){
-    console.log("Contribute Render function");
-    const { userLocation, viewport, onViewportChange, data, sideBarData, mapboxApiAccessToken, distance, onFetch, onInputChange } = this.props;
-
-    console.log("-->this.props.userLocation:", userLocation);
-    console.log("-->this.props.data:", data);
-    console.log("-->this.props.viewport:", viewport);
-
+    const { userLocation, viewport, onViewportChange, data, sideBarData, mapboxApiAccessToken, distance, onFetch, onClick, onInputChange } = this.props;
     return (
       <div className="Contribute">
         <Sidebar
           cardComponent = "AddCard"
           data = {sideBarData}
           onInputChange = {onInputChange}
+          onClick = {onClick}
         />
         <Map
           viewport={viewport}
