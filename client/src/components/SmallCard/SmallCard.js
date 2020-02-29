@@ -9,16 +9,19 @@ class SmallCard extends Component {
   capitalize = (s) => {
     return (s.charAt(0).toUpperCase() + s.slice(1))
   }
+  onClicked = () => {
+    this.props.onClick(this.props.id)
+  }
 
   render() {
-    const { animal, submittedAt, submitter, comment, onClick } = this.props;
+    const { animal, submittedAt, submitter, comment} = this.props;
     
     const animalFormatted = this.capitalize(animal)
     const submitterFormatted = this.capitalize(submitter)
     const submittedAtFormatted = format(Date.parse(submittedAt), "h aa on MMMM do")
     return (
     <Card className='SmallCard' square="true">
-      <CardActionArea onClick={onClick} >
+      <CardActionArea onClick={this.onClicked} >
       <CardHeader title={animalFormatted} subheader={`Spotted by ${submitterFormatted} at ${submittedAtFormatted}`} style={{paddingBottom: "0"}} />
       <CardContent square={true} className='SmallCard-content'>
         <CardImage animal={animal} />

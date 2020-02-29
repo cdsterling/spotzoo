@@ -200,7 +200,7 @@ class App extends Component {
                     sideBarData = {this.state.data}
                     distance = {this.state.distance}  
                     onFetch = {() => this.onFetch()}  
-                    // onClick =      
+                    onClick = {this.onClicked}      
                     />
                   } 
                   />
