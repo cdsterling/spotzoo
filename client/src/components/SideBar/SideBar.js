@@ -6,7 +6,7 @@ import AddCard from '../AddCard/AddCard.js';
 import './SideBar.css';
 class Sidebar extends Component {
     render(){
-        const { cardComponent, data, onInputChange } = this.props;
+        const { cardComponent, data, onInputChange, onClick } = this.props;
 
         if (cardComponent === "SmallCard") {
             return(
