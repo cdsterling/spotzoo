@@ -17,7 +17,7 @@ class Map extends Component {
                 <ReactMapGl
                     {...this.props.viewport}
                     mapboxApiAccessToken={process.env.REACT_APP_TOKEN}
-                    mapStyle='mapbox://styles/marby87/ck6j39qkz0i7k1inu9gqqc4o1'
+                    mapStyle='mapbox://styles/marby87/ck780rtec36tr1jlol58w7j5g'
                     onViewportChange={(viewport) => this.props.onViewportChange(viewport)}>
 
                     {Object.keys(this.props.userLocation).length !== 0 ? (

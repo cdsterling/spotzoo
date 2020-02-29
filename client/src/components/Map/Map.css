@@ -8,7 +8,7 @@
     transition: width 2s, height 2s;
   }
   .markers:nth-child(odd){
-    color:rgb(245, 229, 10);
+    color:rgb(22, 12, 156);
   }
   .markers span{
     font-weight: bolder;
