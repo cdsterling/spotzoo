@@ -36,8 +36,8 @@ class AddCard extends Component {
                     )}
                     </Select>
                 </FormControl>
-                <TextField id="firstName" required label="First Name" variant="outlined" fullWidth value={submitter} onChange={(event) => onInputChange(event)}  style={{marginBottom: "1rem"}} />
-                <TextField id="comment" label="Comment" variant="outlined" style={{marginBottom: "1rem"}} fullWidth value={comment} onChange={(event) => onInputChange(event)} />
+                <TextField id="firstName" required label="First Name" variant="outlined" name="submitter" fullWidth value={submitter} onChange={(event) => onInputChange(event)}  style={{marginBottom: "1rem"}} />
+                <TextField id="comment" label="Comment" variant="outlined" name="comment" style={{marginBottom: "1rem"}} fullWidth value={comment} onChange={(event) => onInputChange(event)} />
                 <Button variant="contained" color="primary" type="submit" fullWidth >
                     Submit
                 </Button>
