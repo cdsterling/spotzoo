@@ -155,7 +155,7 @@ class App extends Component {
             let viewport = {...this.state.viewport}
             viewport.longitude = i.longitude;
             viewport.latitude = i.latitude;
-            viewport.zoom = 17;
+            viewport.zoom = 15;
             this.setState({viewport})
   
           }
@@ -165,7 +165,7 @@ class App extends Component {
         let viewport = {...this.state.viewport}
         viewport.longitude = this.state.userLocation.long;
         viewport.latitude = this.state.userLocation.lat;
-        viewport.zoom = 17;
+        viewport.zoom = 12;
         this.setState({viewport})
         this.setState({clicked:{}})
 
