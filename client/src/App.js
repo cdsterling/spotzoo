@@ -38,7 +38,8 @@ class App extends Component {
       
     };
   
-  onViewportChange = viewport => {
+  onViewportChange = (viewport) => {
+      console.log("entering onViewportChange Method:", viewport)
     this.setState({viewport});
   }
   // User location function
@@ -183,30 +184,7 @@ class App extends Component {
             timestamp={'timestamp'}
             submitted_by={'submitted by'}
           />
-          {/* <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          />
-          <SmallCard 
-            emoji={'🐇'}
-            name={'name'}
-            timestamp={'timestamp'}
-            submitted_by={'submitted by'}
-          /> */}
+          
         </div>
         <div className="MapContainer APPJS">
         <ReactMapGl
