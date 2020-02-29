@@ -100,7 +100,8 @@ class App extends Component {
         .then(res => res.json())
         .then(animals => {
           console.log('receiving animals data', animals);
-          const animalOptions = animals[0].animals
+          let animalOptions = animals[0].animals
+          animalOptions = animalOptions.sort()
           this.setState({animals: animalOptions});
           })
   }

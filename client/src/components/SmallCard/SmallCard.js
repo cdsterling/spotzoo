@@ -15,7 +15,7 @@ class SmallCard extends Component {
     
     const animalFormatted = this.capitalize(animal)
     const submitterFormatted = this.capitalize(submitter)
-    const submittedAtFormatted = format(Date.parse(submittedAt), "h aa on MMMM do")
+    const submittedAtFormatted = format(Date.parse(submittedAt), "h aa on MMMM Do")
     return (
     <Card className='SmallCard' square="true">
       <CardActionArea onClick={onClick} >
