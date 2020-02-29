@@ -1,5 +1,6 @@
 {
   "name": "reactexpress",
+  "homepage": ".",
   "version": "1.0.0",
   "description": "Starter kit for creating React and Express apps",
   "main": "server.js",
