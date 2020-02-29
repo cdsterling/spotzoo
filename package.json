@@ -1,25 +1,26 @@
 {
-  "name": "reactexpress",
+  "name": "spotzoo",
   "homepage": ".",
   "version": "1.0.0",
   "description": "Starter kit for creating React and Express apps",
   "main": "server.js",
   "scripts": {
     "client-install": "cd client && npm install",
-    "start": "npm install && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
+    "start": "node server.js",
+    "postinstall": "bash ./client/build.sh",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "author": "Brad Traversy",
+  "author": "SpotZoo Inc",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^1.14.6"
   },
   "dependencies": {
     "concurrently": "^3.5.1",
-    "express": "^4.16.2",
-    "mongodb": "^3.5.3"
+    "express": "4.16.3",
+    "mongodb": "^3.5.3",
+    "nodemon": "1.18.7"
   }
 }

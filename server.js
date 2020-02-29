@@ -1,26 +1,13 @@
-// const express = require('express');
-
-// const app = express();
-
-// app.get('/api/customers', (req, res) => {
-//   const customers = [
-//     {name : 'costco', latitude: 37.671340942,longitude : -122.085540771},
-//     {name : 'southland', latitude: 37.652370453, longitude: -122.103828430 },
-//     {name : 'bart', latitude: 37.6698, longitude: -122.0870 },
-//   ];
-
-//   res.json(customers);
-// });
-
+const path = require('path');
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 const app = express();
 app.use(express.json());
-const PORT = process.env.PORT || 5000;
-const ObjectId = require('mongodb').ObjectId;
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://marby123:marby123@cluster0-itdny.mongodb.net/spotzoo1";
-const MONGODB_DATABASE = 'spotzoo1';
+// const PORT = process.env.PORT || 5000;
+// const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://marby123:marby123@cluster0-itdny.mongodb.net/spotzoo1";
+// const MONGODB_DATABASE = 'spotzoo1';
 
 
 app.get('/api/mongodb/:collectionName/', (request, response) => {
@@ -85,20 +72,55 @@ app.delete('/api/mongodb/:collectionName/', (request, response) => {
 
 
 
+/////////////////////////////////////////////
+// Boilerplate, no need to touch what's below
+
+/////////////////////////////////////////////
+// Logger & configuration
 function logger(req, res, next) {
-  console.log(req.method, req.url);
-  next();
-}
-app.use(logger);
-
-let db;
-
-MongoClient.connect(MONGODB_URL, (err, client) => {
-  if (err) throw err;
-  console.log("--MongoDB connection successful");
-  db = client.db(MONGODB_DATABASE);
-
-  app.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`);
-  })
-});
+    console.log(req.method, req.url);
+    next();
+  }
+  app.use(logger);
+  /////////////////////////////////////////////
+  
+  
+  // For production, handle any requests that don't match the ones above
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  
+  // Wild-card, so handle everything else
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  });
+  
+  
+  // Set up configuration variables
+  if (!process.env.MONGODB_URI) {
+    console.log('- Error - Must specify the following env variables:');
+    console.log("MONGODB_URI='mongodb://someUser:somePW@site.com:1234/someDB'");
+    console.log('- (See README.md)');
+    process.exit(1);
+  }
+  const MONGODB_URL = process.env.MONGODB_URI;
+  const splitUrl = MONGODB_URL.split('/');
+  const mongoDbDatabaseName = splitUrl[splitUrl.length - 1];
+  
+  let db;
+  // First connect to MongoDB, then start HTTP server
+  MongoClient.connect(MONGODB_URL, {useNewUrlParser: true}, (err, client) => {
+    if (err) throw err;
+    console.log("--MongoDB connection successful");
+    db = client.db(mongoDbDatabaseName);
+  
+    // Start the server
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`
+        *********************************************
+        * Insecure prototyping backend is running!  *
+        * Only use for prototyping                  *
+        * Backend server up at ${PORT}              *
+        *********************************************
+      `);
+    })
+  });
