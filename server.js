@@ -19,7 +19,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 const ObjectId = require('mongodb').ObjectId;
 
-const MONGODB_URL = "mongodb+srv://marby123:marby123@cluster0-itdny.mongodb.net/spotzoo1";
+const MONGODB_URL = process.env.MONGODB_URL;
 const MONGODB_DATABASE = 'spotzoo1';
 
 
@@ -92,6 +92,17 @@ function logger(req, res, next) {
 app.use(logger);
 
 let db;
+
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+  }
+
+
 
 MongoClient.connect(MONGODB_URL, (err, client) => {
   if (err) throw err;
