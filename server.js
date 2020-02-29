@@ -21,7 +21,10 @@ const ObjectId = require('mongodb').ObjectId;
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const MONGODB_DATABASE = 'spotzoo1';
+const path = require("path");
 
+
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 app.get('/api/mongodb/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
@@ -38,7 +41,7 @@ app.get('/api/mongodb/:collectionName/', (request, response) => {
 });
 
 app.post('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
+  const collectionName = request.params.collectionN ame;
   const data = request.body;
   console.log("method app.POST is invoked, data:", data);
 
@@ -97,6 +100,10 @@ MongoClient.connect(MONGODB_URL, (err, client) => {
   if (err) throw err;
   console.log("--MongoDB connection successful");
   db = client.db(MONGODB_DATABASE);
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
 
   app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
