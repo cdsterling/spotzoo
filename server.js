@@ -93,17 +93,6 @@ app.use(logger);
 
 let db;
 
-if (process.env.NODE_ENV === 'production') {
-    // Serve any static files
-    app.use(express.static(path.join(__dirname, 'client/build')));
-    // Handle React routing, return all requests to React app
-    app.get('*', function(req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    });
-  }
-
-
-
 MongoClient.connect(MONGODB_URL, (err, client) => {
   if (err) throw err;
   console.log("--MongoDB connection successful");
@@ -111,5 +100,6 @@ MongoClient.connect(MONGODB_URL, (err, client) => {
 
   app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
+    console.log(`Mongo Url ${MONGODB_URL}`)
   })
 });
