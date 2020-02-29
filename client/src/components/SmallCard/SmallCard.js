@@ -12,6 +12,7 @@ class SmallCard extends Component {
 
   render() {
     const { animal, submittedAt, submitter, comment, onClick } = this.props;
+    
     const animalFormatted = this.capitalize(animal)
     const submitterFormatted = this.capitalize(submitter)
     const submittedAtFormatted = format(Date.parse(submittedAt), "h aa on MMMM do")

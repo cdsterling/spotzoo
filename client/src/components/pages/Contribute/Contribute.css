@@ -1,1 +1,20 @@
-/* Contribute.css */
+.Contribute{
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 1fr;
+}
+
+.SideBarContainer {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  height: 90vh;
+}
+
+.MapContainer {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+}

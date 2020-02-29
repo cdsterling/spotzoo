@@ -40,9 +40,9 @@ class App extends Component {
     data:[],
     distance : [],
     animals:[],
-    animal:"name",
-    submitter:"submitter",
-    comment:"comment",
+    animal:"",
+    submitter:"",
+    comment:"",
     clicked:{}
     
   };
@@ -105,7 +105,7 @@ class App extends Component {
         .then(res => res.json())
         .then(data => {
           console.log('receiving markers data', data);
-          this.setState({data});
+          this.setState({data: data});
           this.setUserLocation();
                  
         });
@@ -113,25 +113,16 @@ class App extends Component {
         .then(res => res.json())
         .then(animals => {
           console.log('receiving animals data', animals);
-          this.setState({animals});
-          console.log(animals)
+          const animalOptions = animals[0].animals
+          this.setState({animals: animalOptions});
           })
   }
 
-  onChangeContent = (ev) => {
+  // changes state when inputting new animal
+  onInputChange = event => {
     this.setState({
-      animal : ev.target.value,
-    });
-  }
-  onChangeSubmitter = (ev) => {
-    this.setState({
-      submitter : ev.target.value,
-    });
-  }
-  onChangeComment = (ev) => {
-    this.setState({
-      comment : ev.target.value,
-    });
+      [event.target.name]: event.target.value
+    })
   }
 
   //Post function// create new markers, store data into database
@@ -190,40 +181,71 @@ class App extends Component {
       }
 
     }
-//   componentDidMount(){
-//     this.onFetch();  
-//   }
+  componentDidMount(){
+    this.onFetch();  
+  }
 
   render () {
-    return (
-      <div className="App">
-        <div className="NavBarContainer HOMEJS">
-          <NavBar 
-            homeLink='/'
-            contributeLink='/contribute'
-          />
-        </div>
-        <div className="App-mainContent">
-          <Switch>
-            <Route 
-              exact path='/' 
-              render={() => 
-                <Home 
-                  viewport={this.state.viewport}
-                  mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
-                  onViewportChange = {(viewport) => this.onViewportChange(viewport)}
-                  userLocation = {this.state.userLocation}
-                  data = {this.state.data}
-                  distance = {this.state.distance}  
-                  onFetch = {() => this.onFetch()}       
-                />
-              } 
+    if (this.state.data) {
+      return (
+        <div className="App">
+          <div className="NavBarContainer HOMEJS">
+            <NavBar 
+              homeLink='/'
+              contributeLink='/contribute'
             />
-            <Route exact path='/contribute/' component={Contribute} />
-          </Switch>
+          </div>
+          <div className="App-mainContent">
+            <Switch>
+              <Route 
+                exact path='/' 
+                render={() => 
+                  <Home 
+                    viewport={this.state.viewport}
+                    mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+                    onViewportChange = {(viewport) => this.onViewportChange(viewport)}
+                    userLocation = {this.state.userLocation}
+                    data = {this.state.data}
+                    sideBarData = {this.state.data}
+                    distance = {this.state.distance}  
+                    onFetch = {() => this.onFetch()}  
+                    // onClick =      
+                    />
+                  } 
+                  />
+              <Route 
+                render={() => 
+                  <Contribute 
+                    viewport={this.state.viewport}
+                    mapboxApiAccessToken = {process.env.REACT_APP_TOKEN}
+                    onViewportChange = {(viewport) => this.onViewportChange(viewport)}
+                    userLocation = {this.state.userLocation}
+                    data = {this.state.data}
+                    sideBarData = {
+                      {
+                        animalOptions: this.state.animals, 
+                        animal: this.state.animal, 
+                        submitter: this.state.submitter, 
+                        comment: this.state.comment,  
+                      }
+                    }
+                    onInputChange = {this.onInputChange}
+                    distance = {this.state.distance}  
+                    onFetch = {() => this.onFetch()}       
+                    // onClick
+                    />
+                  } 
+                  />
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
       );
+    } else {
+      return (
+        <div> Loading....</div>
+      )
+    }
     }
   }
 
