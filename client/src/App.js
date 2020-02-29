@@ -55,7 +55,7 @@ class App extends Component {
             let k = new mapboxgl.LngLat(i.longitude, i.latitude);
             let s = new mapboxgl.LngLat(setUserLocation.long, setUserLocation.lat)
             let dist = k.distanceTo(s)* 0.000621
-            let miles = (Math.max( Math.ceil(dist * 10) / 10, 2.8 ))
+            let miles = Math.round(dist * 100) / 100
             let id = i["_id"];
             distanceOne[id] = miles;     
           } 
