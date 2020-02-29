@@ -1,64 +1,43 @@
 import React, { Component } from 'react';
-
-import './AddCard.css';
 import {Card, Typography, CardActions, CardActionArea, CardContent, CardHeader, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
+
+import CardImage from '../CardImage/CardImage.js'
+import './AddCard.css';
 
 class AddCard extends Component {
 
-    state = {
-        animal: "",
-        submitter: "", 
-        comment: "",
-    }
-
-    onAnimalChange = (event) => {
-        this.setState({
-            animal: event.target.value,
-        })
-    }
-
-    onSubmitterChange = (event) => {
-        this.setState({
-            submitter: event.target.value,
-        })
-    }
-
-    onCommentChange = (event) => {
-        this.setState({
-            comment: event.target.value,
-        })
-    }
-
     handleSubmit = () => {
-        console.log(this.state)
+        console.log("submitted");
     }
 
     render() {
-        const { animal, animalOptions, submitter, comment, onSubmit } = this.props;
+        const { animal, animalOptions, submitter, comment, onSubmit, onInputChange } = this.props;
+
         return (
         <Card className='AddCard' square="true">
         <CardContent square={true} className='AddCard-content'>
             <CardHeader title="Spotted Something?"  />
             <div className='AddCard-primary'>
-
+            <CardImage animal={animal} />
             <form onSubmit={this.handleSubmit} className='AddCard-primary' >
                 <FormControl variant="outlined" style={{marginBottom: "1rem"}}>
                     <InputLabel id="label" required style={{backgroundColor: "white"}}>
                         Animal
                     </InputLabel>
                     <Select
-                        value={this.state.animal}
-                        onChange={(event) => this.onAnimalChange(event)}
+                        name="animal"
+                        value={animal}
+                        onChange={(event) => onInputChange(event)}
                         labelId="label" 
                         id="select"
                     >
-                    {animalOptions.map( animal => 
-                        (<MenuItem value={animal}>{animal}</MenuItem>)
+                    {animalOptions.map( option => 
+                        (<MenuItem value={option}>{option}</MenuItem>)
                     )}
                     </Select>
                 </FormControl>
-                <TextField id="firstName" required label="First Name" variant="outlined" fullWidth value={this.state.submitter} onChange={(event) => this.onSubmitterChange(event)}  style={{marginBottom: "1rem"}} />
-                <TextField id="comment" label="Comment" variant="outlined" style={{marginBottom: "1rem"}} fullWidth value={this.state.comment} onChange={(event) => this.onCommentChange(event)} />
+                <TextField id="firstName" required label="First Name" variant="outlined" fullWidth value={submitter} onChange={(event) => onInputChange(event)}  style={{marginBottom: "1rem"}} />
+                <TextField id="comment" label="Comment" variant="outlined" style={{marginBottom: "1rem"}} fullWidth value={comment} onChange={(event) => onInputChange(event)} />
                 <Button variant="contained" color="primary" type="submit" fullWidth >
                     Submit
                 </Button>

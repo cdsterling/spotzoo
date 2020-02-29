@@ -14,24 +14,26 @@ class Home extends Component {
 //
   render(){
     console.log("Home Render function");
-    console.log("-->this.props.userLocation:", this.props.userLocation);
-    console.log("-->this.props.data:", this.props.data);
-    console.log("-->this.props.viewport:", this.props.viewport);
+    const { userLocation, viewport, onViewportChange, data, sideBarData, mapboxApiAccessToken, distance, onFetch } = this.props;
+
+    console.log("-->this.props.userLocation:", userLocation);
+    console.log("-->this.props.data:", data);
+    console.log("-->this.props.viewport:", viewport);
 
     return (
       <div className="Home">
         <Sidebar
-          sideBarFill = "animals"
-          animalData = {this.props.data}
+          cardComponent = "SmallCard"
+          data = {sideBarData}
         />
         <Map
           viewport={this.props.viewport}
-          mapboxApiAccessToken = {this.props.mapboxApiAccessToken}
-          onViewportChange = {this.props.onViewportChange}
-          userLocation = {this.props.userLocation}
-          data = {this.props.data}
-          distance = {this.props.distance}  
-          onFetch = {this.props.onFetch}       
+          mapboxApiAccessToken = {mapboxApiAccessToken}
+          onViewportChange = {onViewportChange}
+          userLocation = {userLocation}
+          data = {data}
+          distance = {distance}  
+          onFetch = {onFetch}       
         />
       </div>
     );

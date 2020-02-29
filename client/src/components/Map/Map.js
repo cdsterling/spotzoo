@@ -12,11 +12,11 @@ import './Map.css';
 
 class Map extends Component {
 
-    componentDidMount(){
+    // componentDidMount(){
     
-        this.props.onFetch();  
+    //     this.props.onFetch();  
     
-      }
+    //   }
 
     render() {
         console.log("Entering Map render");
