@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Typography, CardActions, CardActionArea, CardContent, CardHeader, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
+import {Card, CardContent, CardHeader, TextField, FormControl, InputLabel, Select, MenuItem, Button} from '@material-ui/core';
 
 import CardImage from '../CardImage/CardImage.js'
 import './AddCard.css';
@@ -38,7 +38,7 @@ class AddCard extends Component {
                 </FormControl>
                 <TextField id="firstName" required label="First Name" variant="outlined" name="submitter" fullWidth value={submitter} onChange={(event) => onInputChange(event)}  style={{marginBottom: "1rem"}} />
                 <TextField id="comment" label="Comment" variant="outlined" name="comment" style={{marginBottom: "1rem"}} fullWidth value={comment} onChange={(event) => onInputChange(event)} />
-                <Button variant="contained" color="primary" type="submit" fullWidth >
+                <Button variant="contained" color="primary" onClick={onSubmit} fullWidth >
                     Submit
                 </Button>
 
